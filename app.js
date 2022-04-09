@@ -5,6 +5,8 @@ const Vision = require('@hapi/vision');
 const HapiSwagger = require('hapi-swagger');
 const server = require('./config/server');
 const Pack = require('./package');
+let Mongoose = require('mongoose');
+
 const init = async () => {
 
     const swaggerOptions = {
@@ -46,6 +48,11 @@ const init = async () => {
             }
         }
     ])
+
+    Mongoose.connect(`mongodb://localhost/${process.env.DATABASE}`, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => console.log('DB Connected')).catch(err=>console.log(err));
 
     server.events.on('response', function (request) {
         console.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.path + ' --> ' + request.response.statusCode);
