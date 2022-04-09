@@ -2,7 +2,6 @@ const User = require('../model/user');
 const {success, error} = require('../response/macros');
 const { hashPassword, verifyPassword} = require('../services/password');
 const Jwt = require('@hapi/jwt');
-const { find } = require('../model/user');
 
 module.exports = {
     userSignup,
