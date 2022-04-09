@@ -6,8 +6,12 @@ const HapiSwagger = require('hapi-swagger');
 const server = require('./config/server');
 const Pack = require('./package');
 let Mongoose = require('mongoose');
+const { jwtAuthentication } = require('./config/authenticate');
+const baseRouter = require('./routes');
 
 const init = async () => {
+
+    await jwtAuthentication(server);
 
     const swaggerOptions = {
         documentationPath: '/docs',
@@ -53,6 +57,13 @@ const init = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }).then(() => console.log('DB Connected')).catch(err=>console.log(err));
+
+
+    await server.register(baseRouter,{
+		routes:{
+			prefix:'/api'
+		}
+	});
 
     server.events.on('response', function (request) {
         console.log(request.info.remoteAddress + ': ' + request.method.toUpperCase() + ' ' + request.path + ' --> ' + request.response.statusCode);
