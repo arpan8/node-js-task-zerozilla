@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { ObjectId } = mongoose.Schema;
 
 const userSchema = new mongoose.Schema(
     {
@@ -12,11 +11,7 @@ const userSchema = new mongoose.Schema(
             type: String,
             maxLength: 1000 ,
             required: true
-        },
-        agency:{
-            type: ObjectId,
-            ref: "Agency"
-        },
+        }
         
     },
     { timestamps: true }

@@ -19,10 +19,15 @@ const clientSchema = new mongoose.Schema(
             required: true
         },
         ph_no: {
-            type: String,
+            type: Number,
             maxLength: 10,
             required: true
         },
+        total_bill: {
+            type: Number,
+            maxlength: 20,
+            required: true
+        }
         
     },
     { timestamps: true }

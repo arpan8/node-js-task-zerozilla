@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const crypto = require('crypto');
+const { ObjectId } = mongoose.Schema;
 
 const agencySchema = new mongoose.Schema(
     {
@@ -28,10 +28,15 @@ const agencySchema = new mongoose.Schema(
             required: true
         },
         ph_no: {
-            type: String,
+            type: Number,
             maxLength: 10,
             required: true
         },
+        user: {
+            type: ObjectId,
+            ref: "User",
+            required: true
+        }
         
     },
     { timestamps: true }
